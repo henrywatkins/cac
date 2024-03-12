@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cac"
+dynamic = ["version"]
+description = 'Terminal based plotting with seaborn'
+readme = "README.md"
+requires-python = ">=3.9"
+license = {file = "LICENSE"}
+keywords = []
+authors = [
+  { name = "Henry Watkins", email = "h.watkins@ucl.ac.uk" },
+]
+classifiers = [
+  "Programming Language :: Python",
+]
+dependencies = [
+  "numba",
+  "numpy",
+]
+
+[tool.hatch.version]
+path = "cac/__about__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "pytest",
+  "black",
+  "isort",
+]
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+fmt = "black . ; isort ."
+clean = 'find . | grep -E "(/__pycache__$|\.pyc$|\.pyo$)" | xargs rm -rf'
