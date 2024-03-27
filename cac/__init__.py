@@ -1,9 +1,8 @@
 # SPDX-FileCopyrightText: 2024-present Henry Watkins <h.watkins@ucl.ac.uk>
 #
 # SPDX-License-Identifier: MIT
-from numba import jit
 import numpy as np
-
+from numba import jit
 
 
 @jit(nopython=True, parallel=True)
@@ -38,7 +37,7 @@ def one_hot_encode(X):
     return encoded, classes
 
 
-def cfeatures(group_ids, data ,top_k=5, show_values=False):
+def cfeatures(group_ids, data, top_k=5, show_values=False):
     """Find the top k features most heavily correlated with each group id"""
     vecs, vocab = one_hot_encode(data)
     cluster_labels = np.array(group_ids)
@@ -54,6 +53,6 @@ def cfeatures(group_ids, data ,top_k=5, show_values=False):
             top_vars = [(reversed_vocab[i], cluster_mccs[cl][i]) for i in top_idxs]
         else:
             top_vars = [reversed_vocab[i] for i in top_idxs]
-        #top_vars = [reversed_vocab[i] for i in top_idxs]
+        # top_vars = [reversed_vocab[i] for i in top_idxs]
         top_cluster_vars[cl] = top_vars
     return top_cluster_vars
